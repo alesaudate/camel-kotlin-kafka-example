@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeper_camel
+    network_mode: host
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=32181
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka_camel
+    network_mode: host
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=127.0.0.1:32181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:29092
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_CREATE_TOPICS=records:1:1

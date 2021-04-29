@@ -1,0 +1,19 @@
+camel:
+  springboot:
+    main-run-controller: true
+  component:
+    kafka:
+      brokers: localhost:29092
+
+sample:
+  directory:
+    input: src/main/resources/csv
+  kafka:
+    topic: records
+
+logging:
+  pattern:
+    console: "%-5p [%d{ISO8601}] [Thread: %t] [%X] %-55c  %m%n"
+
+  level:
+    org.apache.camel: INFO
